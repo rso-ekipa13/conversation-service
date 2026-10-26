@@ -1,16 +1,15 @@
 # conversation-service
 
-1:1 and group conversations with Event Sourcing and CQRS; gRPC membership API. .NET 10, Marten/PostgreSQL.
+Conversations and groups: who is in which chat, with which role, and settings such as the disappearing-message timer. It also handles message requests, so a stranger's first message waits until you accept it.
 
-Part of an end-to-end encrypted messenger built for *Računalniške storitve v oblaku* (UL FRI, 2026/27) by project group 13.
+The state is event sourced. Every change is stored as an event, the read models are projections of those events, and they can be rebuilt by replaying the history. Other services ask it about membership over gRPC.
 
-| | |
-|---|---|
-| Owner | Amar Mehić |
-| Stack | .NET 10, Marten (PostgreSQL), gRPC |
-| Status | Planned; scaffolding starts in week 1 (27. 10.–8. 11. 2026) |
-| Architecture and plan | <https://github.com/rso-ekipa13/docs> |
+Built with .NET 10, Marten on PostgreSQL and gRPC.
 
-## Branches
+Owner: Amar Mehić. Status: planned.
 
-`main` is protected (pull requests only) and deployable; `dev` is the integration branch.
+## Where this fits
+
+This is one of the repositories of [Pretty Good Pigeon](https://github.com/rso-ekipa13), an end-to-end encrypted messenger built by ekipa 13 for the Cloud Computing course at UL FRI (2026/27). The architecture, plan and decisions live in [docs](https://github.com/rso-ekipa13/docs).
+
+`main` only changes through pull requests; day-to-day work goes to `dev`.
