@@ -3,6 +3,7 @@ using Marten;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Pigeon.Conversations.Api;
 using Pigeon.Conversations.Api.Endpoints;
+using Pigeon.Conversations.Api.Grpc;
 using Pigeon.Conversations.Api.Projections;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,11 @@ builder.Services.AddHealthChecks()
 // The current time comes from DI, so tests can replace it with a fake clock.
 builder.Services.AddSingleton(TimeProvider.System);
 
+// gRPC server. Reflection lets tools such as grpcurl discover the services; only in Development.
+builder.Services.AddGrpc();
+if (builder.Environment.IsDevelopment())
+    builder.Services.AddGrpcReflection();
+
 var app = builder.Build();
 
 // Endpoints
@@ -46,6 +52,10 @@ app.MapHealthChecks("/health/ready", new HealthCheckOptions
 
 app.MapGet("/", () => "conversation-service");
 app.MapConversationEndpoints();
+
+app.MapGrpcService<MembershipGrpcService>();
+if (app.Environment.IsDevelopment())
+    app.MapGrpcReflectionService();
 
 app.Run();
 

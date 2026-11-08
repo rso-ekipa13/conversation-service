@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pigeon.conversations.v1;
+
+option csharp_namespace = "Pigeon.Conversations.Grpc.V1";
+
+service Membership {
+  // Returns the current members of a conversation.
+  // Errors: INVALID_ARGUMENT if an id is not a UUID;
+  //         NOT_FOUND if the conversation does not exist in this tenant.
+  rpc GetMembers(GetMembersRequest) returns (GetMembersResponse);
+}
+
+message GetMembersRequest {
+  // UUIDs in canonical text form
+  string tenant_id       = 1;
+  string conversation_id = 2;
+}
+
+message GetMembersResponse {
+  repeated Member members = 1;
+}
+
+// A message rather than a plain string, so fields such as the role can be added later.
+message Member {
+  string user_id = 1;
+}

@@ -9,6 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.85.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.85.0" />
     <PackageReference Include="Marten" Version="9.58.0" />
+  </ItemGroup>
+
+  <!-- Generate C# server code from the contract. ProtoRoot makes import paths start at protos/. -->
+  <ItemGroup>
+    <Protobuf Include="..\..\protos\pigeon\conversations\v1\membership.proto" ProtoRoot="..\..\protos" GrpcServices="Server" Link="Protos\membership.proto" />
   </ItemGroup>
 </Project>
