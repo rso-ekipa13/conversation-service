@@ -3,4 +3,7 @@
     <Project Path="src/Pigeon.Conversations.Api/Pigeon.Conversations.Api.csproj" />
     <Project Path="src/Pigeon.Conversations.Domain/Pigeon.Conversations.Domain.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Pigeon.Conversations.IntegrationTests/Pigeon.Conversations.IntegrationTests.csproj" />
+  </Folder>
 </Solution>

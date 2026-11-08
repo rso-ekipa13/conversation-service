@@ -1,0 +1,8 @@
+# Keep the build context small and avoid copying local build output into the image.
+**/bin/
+**/obj/
+.git/
+.vscode/
+.idea/
+tests/
+*.md

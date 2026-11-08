@@ -14,8 +14,9 @@
     <PackageReference Include="Marten" Version="9.58.0" />
   </ItemGroup>
 
-  <!-- Generate C# server code from the contract. ProtoRoot makes import paths start at protos/. -->
+  <!-- Generate C# server and client code from the contract (the client is used by the integration tests).
+       ProtoRoot makes import paths start at protos/. -->
   <ItemGroup>
-    <Protobuf Include="..\..\protos\pigeon\conversations\v1\membership.proto" ProtoRoot="..\..\protos" GrpcServices="Server" Link="Protos\membership.proto" />
+    <Protobuf Include="..\..\protos\pigeon\conversations\v1\membership.proto" ProtoRoot="..\..\protos" GrpcServices="Both" Link="Protos\membership.proto" />
   </ItemGroup>
 </Project>
